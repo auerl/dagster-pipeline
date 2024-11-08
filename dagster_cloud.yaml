@@ -5,4 +5,9 @@ locations:
     build:
       directory: ./
       registry: 804022897688.dkr.ecr.eu-central-1.amazonaws.com/dagster
-      # registry: ghcr.io/<org>/<image-name>
+  - location_name: second_etl
+    code_source:
+      package_name: second_etl.definitions
+    build:
+      directory: ./
+      registry: 804022897688.dkr.ecr.eu-central-1.amazonaws.com/dagster
