@@ -141,23 +141,6 @@ jobs:
         with:
           command: "ci set-build-output --location-name=quickstart_etl --image-tag=$IMAGE_TAG-quickstart_etl"
 
-      - name: Build and upload Docker image for "second_etl"
-        if: steps.prerun.outputs.result != 'skip'
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ env.IMAGE_REGISTRY }}:${{ env.IMAGE_TAG }}-second_etl
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Update build session with image tag for second_etl
-        id: ci-set-build-output-example-location2
-        if: steps.prerun.outputs.result != 'skip'
-        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
-        with:
-          command: "ci set-build-output --location-name=second_etl --image-tag=$IMAGE_TAG-second_etl"
-  
       # Deploy all code locations in this build session to Dagster Cloud
       - name: Deploy to Dagster Cloud
         id: ci-deploy
